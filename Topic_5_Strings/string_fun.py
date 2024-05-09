@@ -74,3 +74,18 @@ print(area_string)
 
 # Documentation on f-strings
 # https://docs.python.org/3/reference/lexical_analysis.html#f-strings
+
+# i can use f-strings with triple quotes
+# this is useful for multi-line strings
+# this is useful for docstrings
+
+long_string = f"""This is a long string
+that spans multiple lines
+    and uses triple quotes      
+    Can use single or double quotes inside this string
+for example 'single quotes' or "double quotes"
+we can use variables and expressions inside f-strings
+for example PI is {PI} and r is {r}
+the area of a circle with radius {r} is {area:.2f}
+"""
+print(long_string)
