@@ -5,7 +5,7 @@
 # Strings can be indexed and sliced
 
 # Strings can be created using single quotes
-food = 'pizza'
+food = 'kartupelis'
 print(food)
 
 # Strings can be created using double quotes
@@ -89,3 +89,184 @@ for example PI is {PI} and r is {r}
 the area of a circle with radius {r} is {area:.2f}
 """
 print(long_string)
+
+# now how about getting length of a string
+# we can use len function
+food_length = len(food)
+print(f"Length of {food} is {food_length}")
+
+# now we can start accessing our string letter by letter
+# we can use indexing
+# in Python we use 0-based indexing using []
+
+# first letter
+first_letter = food[0] # note the 0 index
+print(f"First letter of {food} is {first_letter}")
+second_letter = food[1]
+print(f"Second letter of {food} is {second_letter}")
+
+# how about last one?
+# we could use len function that we just learned
+# or we could use -1 index
+# first the last letter with length
+index_last = len(food) - 1
+last_letter = food[index_last]
+print(f"Last letter of {food} is {last_letter} it is at index {index_last}")
+
+# we can use negative indexing
+# Python offers two indexing methods
+# we can go backwards using negative indexes
+# last letter
+last_letter = food[-1] # same as food[len(food) - 1]
+print(f"Last letter of {food} is {last_letter}")
+
+# also see https://developers.google.com/edu/python/strings for more string exercises
+
+# so second to last letter?
+second_last_letter = food[-2]
+print(f"Second to last letter of {food} is {second_last_letter}")
+print(f"Its negative index is -2")
+
+# How about what happens if we try out of bounds index?
+try:
+    out_of_bounds = food[10] # remember we start from 0 so 10 is out of bounds(it would be 11th letter)
+except IndexError as e:
+    print(f"IndexError {e}")
+
+# how about getting more than one letter?
+# in Python we can use slicing
+
+# let's get first 3 letters
+# slicing full syntax is [start:stop:step]
+# we can omit start, stop or step
+# if we omit start, it is 0
+# if we omit stop, it is end of the string
+# if we omit step, it is 1
+
+# so let's get first 3 letters
+first_three = food[:3] # same as food[0:3]
+# so we start from 0 and go up to 3 but not including 3,because index 3 is actually 4th letter
+print(f"First three letters of {food} are {first_three}")
+
+# we can slice from the end
+# let's get last 3 letters
+last_three = food[-3:] # same as food[-3:len(food)]
+# we start from -3 and go to the end
+print(f"Last three letters of {food} are {last_three}")
+
+# how about middle
+middle = food[3:6] # we start from 3(4th letter) and go up to 6(7th letter) but not including 6
+print(f"Middle letters of {food} are {middle}")
+# now let's get all letters except first 3 and last 3
+middle = food[3:-3] # we start from 3(4th letter) and go up to -3 but not including -3 (last 3 letters)
+print(f"Middle letters of {food} are {middle}")
+
+# we can use step
+# first let's get our english alphabet
+alphabet = "abcdefghijklmnopqrstuvwxyz" # we could have used import string; alphabet = string.ascii_lowercase
+# let's get every second letter
+every_second = alphabet[::2] # we start from 0 and go to the end with step 2
+print(f"Every second letter of the alphabet is {every_second}")
+# we could start with second letter
+every_second = alphabet[1::2] # we start from 1 and go to the end with step 2
+print(f"Every second letter of the alphabet starting from b is {every_second}")
+# how about starting from 4th and ending before last 3 and step 3
+every_third = alphabet[3:-3:3] # we start from 3 and go up to -3 but not including -3 with step 3
+print(f"Every third letter of the alphabet starting from d and ending before x is {every_third}")
+
+# we can reverse a string
+reverse_food = food[::-1] # we start from the end and go to the beginning with step -1
+print(f"Reverse of {food} is {reverse_food}")
+# we could have used other negative step values
+reverse_food = food[::-2] # we start from the end and go to the beginning with step -2
+print(f"Every second letter of the reverse of {food} is {reverse_food}")
+
+# note that strings are immutable
+# so if we want to change a string we have to create a new one
+# we can concatenate strings
+# we can use + operator
+# we can use += operator to update the string
+# we can use join method
+# we can use f-strings
+
+# existance check in strings
+# we can use in keyword
+# we can use not in keyword
+
+# let's check if our food has letter a
+if 'a' in food:
+    print(f"Waiter {food} has letter a!")
+else:
+    print(f"Waiter {food} does not have letter a!")
+
+# more generically we can say needle in haystack
+needle = "art"
+if needle in food:
+    print(f"Waiter {food} has {needle}!")
+else:
+    print(f"Waiter {food} does not have {needle}!")
+
+# we can also use find method
+# find returns the index of the first occurance of the substring
+# if substring is not found, find returns -1
+# we can also use rfind method to find the last occurance of the substring (from right)
+
+# let's find the index of letter a
+index_a = food.find('a')
+print(f"Index of letter a in {food} is {index_a}")
+needle = "art"
+index_art = food.find(needle)
+print(f"Index of {needle} in {food} is {index_art}")
+bad_needle = "xyz"
+index_xyz = food.find(bad_needle)
+print(f"Index of {bad_needle} in {food} is {index_xyz}")
+# we could use it in if statement
+if food.find(bad_needle) == -1:
+    print(f"Waiter {food} has {bad_needle}!")
+
+# there is also index method
+# index method is similar to find method
+# index method raises ValueError if substring is not found
+# example with index method
+try:
+    index_xyz = food.index(bad_needle)
+    # so if we get here, we know that bad_needle was found
+    print(f"Index of {bad_needle} in {food} is {index_xyz}")
+except ValueError as e:
+    print(f"ValueError {e}")
+    # good for cases when we can handle the error somehow - change the needle or ignore the error
+
+# we can count the number of occurances of a substring
+# we can use count method
+# count method returns the number of occurances of the substring
+
+# let's count the number of a's in food
+haystack = "ABBBBA"
+needle = "B"
+count = haystack.count(needle)
+print(f"Number of {needle}'s in {haystack} is {count}")
+# note that count is non-overlapping - careful when counting more than one letter
+needle = "BB"
+count = haystack.count(needle)
+print(f"Number of overlapping {needle}'s in {haystack} is {count}") # 2 NOT 3 !
+
+# let's count overlapping strings using for loop
+haystack = "ABBBBA"
+needle = "BB"
+count = 0
+for i in range(len(haystack) - len(needle) + 1):
+    if haystack[i:i+len(needle)] == needle: # we compare the substring with needle
+        print(f"Found {needle} at index {i}")
+        count += 1
+print(f"Number of overlapping {needle}'s in {haystack} is {count}")
+
+# usually when we loop through a string we use for loop without range
+# we can loop through a string letter by letter
+for letter in food:
+    print(letter)
+
+# if we need indexes we can use enumerate
+for index, letter in enumerate(food):
+    print(f"Index {index} has letter {letter} really {food[index]}")
+
+# avoid for in range(len()) when possible - not considered pythonic
