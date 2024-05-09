@@ -270,3 +270,99 @@ for index, letter in enumerate(food):
     print(f"Index {index} has letter {letter} really {food[index]}")
 
 # avoid for in range(len()) when possible - not considered pythonic
+
+# now let's look at some more string methods
+# we can use lower method to convert a string to lower case
+city = "Rīga"
+city_lower = city.lower()
+print(f"{city} in lower case is {city_lower}")
+# same for upper
+city_upper = city.upper()
+print(f"{city} in upper case is {city_upper}")
+# title will capitalize the first letter of each word
+sentence = "Nice sunny day"
+sentence_title = sentence.title()
+print(f"{sentence} in title case is {sentence_title}")
+# capitalize will capitalize the first letter of the string
+sentence = "nice sunny day"
+sentence_capitalize = sentence.capitalize()
+print(f"{sentence} in capitalize case is {sentence_capitalize}")
+# rarer is swapcase which will swap the case of each letter
+sentence = "Nice Sunny Day"
+sentence_swapcase = sentence.swapcase()
+print(f"{sentence} in swapcase case is {sentence_swapcase}")
+
+# note in Visual Studio Code if we have a string we can use . to see all available methods
+# we can also use help(str) to see all available methods
+# full docs on string methods https://docs.python.org/3/library/stdtypes.html#string-methods
+
+# useful method is replace
+# replace will replace all occurances of the substring with another substring
+# replace returns a new string - original string is not changed
+sentence = "I like to drink coffee"
+new_sentence = sentence.replace("coffee", "tea")
+print(f"Original sentence is {sentence}")
+print(f"New sentence is {new_sentence}")
+# i could overwrite the original string
+sentence = sentence.replace("coffee", "tea")
+print(f"Overwritten sentence is {sentence}")
+
+# let's create a new string by iterating over the old one
+# let's replace all a's with x's
+# we could have done it with replace method but let's do it manually
+food = "kartupelis mans mīļākais ēdiens"	# kartupelis mans mīļākais ēdiens
+new_food = "" # typical idea with start with empty string # often called buffer
+# let's also count
+count = 0
+for letter in food:
+    # the idea is that I keep adding letters to new_food
+    # but if I see letter a, I add x instead
+    if letter == 'a':
+        new_food += 'x'  # += is the same as new_food = new_food + 'x'
+        count += 1
+    else:
+        new_food += letter  # I add original letter
+
+print(f"Original food was {food}")
+print(f"New food is {new_food}")
+print(f"Number of a's replaced with x's is {count}")
+
+# now let's talk at cleaning methods
+# strip method will remove leading and trailing whitespace
+dirty_city = "  Rīga  "
+clean_city = dirty_city.strip()
+print(f"Dirty city is '{dirty_city}'")
+print(f"Clean city is '{clean_city}'")
+# there is also lstrip and rstrip
+# lstrip will remove leading whitespace
+# rstrip will remove trailing whitespace
+dirty_city = "  Rīga  "
+clean_city = dirty_city.lstrip()
+print(f"Dirty city is '{dirty_city}'")
+print(f"Clean city is '{clean_city}'")
+dirty_city = "  Rīga  "
+clean_city = dirty_city.rstrip()
+print(f"Dirty city is '{dirty_city}'")
+print(f"Clean city is '{clean_city}'")
+
+# we can supply specific characters to strip
+# let's strip all a's from the beginning and end
+dirty_city = "aaaRīgagaaaa"
+clean_city = dirty_city.strip('a')
+print(f"Dirty city is '{dirty_city}'")
+print(f"Clean city is '{clean_city}'") # note that only leading and trailing a's are removed
+# we can supply multiple characters
+dirty_city = "aaaRīgagaaaa   g aag"
+clean_city = dirty_city.strip('ag xyz') # could supply multiple characters to strip
+print(f"Dirty city is '{dirty_city}'")
+print(f"Clean city after stripping (a and g and whitespace) is '{clean_city}'") 
+
+# then we have startswith and endswith methods
+# startswith will check if the string starts with a substring
+# endswith will check if the string ends with a substring
+# both return True or False
+city = "Rīga"
+if city.startswith("Rī"):
+    print(f"{city} starts with Rī")
+if city.endswith("ga"):
+    print(f"{city} ends with ga")
