@@ -228,3 +228,77 @@ print(f"Sorted prices {prices}")
 prices.sort(reverse=True) # modifies the list in-place
 # since prices are already sorted could have just used prices.reverse()
 print(f"Reverse sorted prices {prices}")
+
+# let's get back to beers 
+# let's add 3 beers at once, Carlsons, Dundulis, and Užavas
+beers.append(["Carlsons", "Dundulis", "Užavas"]) # most likely not what we wanted
+print(f"Beers {beers}")
+# we have created a nested list
+# how would I get value of Užavas?
+# we would use double indexing
+print(f"Užavas {beers[-1][-1]}") # should be Užavas, last item in the last list
+# how about Dundulis?
+print(f"Dundulis {beers[-1][-2]}") # should be Dundulis, second to last item in the last list
+# same as beers[-1][1] but I prefer to use negative indexing
+# let's remove our last element but let's use pop method
+
+# pop removes the last element of the list and returns it so you can save it if you want
+# some languages destroy the element, Python does not
+last_beers = beers.pop() # modifies the list in-place so last element is removed and saved in last_beers
+print(f"Last beers {last_beers}")
+print(f"Beers {beers}")
+# if we want to have flat list we can use extend method
+beers.extend(["Super Bock", "Duff Beer", "Užavas"]) # modifies the list in-place so adds the elements to the end
+print(f"Beers {beers}")
+
+# let's make a copy before we clear everything
+beers_copy = beers.copy() # creates a copy of the list beers
+# let's clear the list
+beers.clear() # modifies the list in-place so removes all elements 
+print(f"Beers {beers} :(")
+# let's get our beers back by using copy
+# i can not pop from empty list
+try:
+    last_beers = beers.pop() # going to fail
+except IndexError as e: # i can use as e to get the exception object
+    print(f"Can not pop from empty list {e}")
+
+# we also get IndexError if we try to access an element that does not exist
+try:
+    print(f"First beer {beers[0]}") # going to fail since I have NO beers at all
+except IndexError as e:
+    print(f"Can not access first beer {e}")
+
+# however slicing does not fail
+print(f"First 3 beers {beers[:3]}") # should be empty list
+# so we can not pop or access an element that does not exist
+# but we can slice an empty list
+print("Let's get our beers back")
+beers = beers_copy.copy() # restores the beers list from copy
+print(f"Beers {beers}")
+# let's get last 5000 beers this is a legal slice
+print(f"Last 5000 beers {beers[-5000:]}") # should be the same as beers
+
+# so now let's do loops
+# let's print all beers one by one
+for beer in beers: # so very similar to strings
+    print(beer)
+
+# if i need index I should use enumerate
+# range is not needed since we have a list
+for i, beer in enumerate(beers,start = 1): # start is optional and defaults to 0
+    print(f"Beer No.{i}. {beer}")
+
+# let's add Lowenbrau to the list
+beers.append("Lowenbrau")
+# all beers just normal print
+print(beers)
+
+# let's get all beers that start with L
+# we could use a for loop
+beers_with_l = []
+for beer in beers:
+    # if beer[0] == "L": # better use startswith method
+    if beer.startswith("L"):
+        beers_with_l.append(beer) # adds a copy of the beer to the list
+print(beers_with_l)
