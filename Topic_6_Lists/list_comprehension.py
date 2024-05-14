@@ -37,6 +37,8 @@ for letter in name:
     also_name_unicode.append([letter, ord(letter)])
 print(also_name_unicode)
 
+
+
 # when to use list comprehension?
 # when you want to create a new list from an existing list
 # when you want to filter out some elements from a list
