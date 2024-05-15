@@ -175,3 +175,175 @@ print(f"Middle index is {middle}")
 print(f"First half of alphabet is {alphabet[:middle]}")
 # every 2nd letter starting from b and stopping in the middle
 print(f"Every second letter of alphabet starting from b and stopping in the middle is {alphabet[1:middle:2]}")
+
+# Python offers a way to reverse a string
+# we could use slicing
+# we could use negative step
+reversed_alphabet = alphabet[::-1]  # so we start from the end and go to the beginning
+print(f"Reversed alphabet is {reversed_alphabet}")
+# we could get every 2nd letter while reversing the alphabet
+print(f"Every second letter while reversing {alphabet[::-2]}")
+
+# existance check
+# we can check if a substring exists in a string
+# we can use the in operator
+# let's check for single letter 'a' in food
+if 'a' in food:
+    print("Food has letter a")
+else:
+    print("Food does not have letter a")
+
+# more generically we can save our needle in a variable
+needle = 'art'
+if needle in food:
+    print(f"Food {food} contains {needle}")
+else:
+    print(f"Food {food} does not contain {needle}")
+
+# we can also find the specific index of a substring
+# we can use the find method
+# find returns the index of the first occurence of the substring
+# if the substring is not found find returns -1
+# let's find the index of letter 'a' in food
+index = food.find('a')
+print(f"Index of letter a is {index}")
+# let's find the index of 'art' in food
+index = food.find('art')
+print(f"Index of art is {index}")
+# then if i know the index and the length of my needle I could print the needle
+# let's find the index of 'art' in food
+needle = 'art'
+index = food.find(needle)
+print(f"Index of {needle} is {index}")
+print(f"Substring {needle} is {food[index:index + len(needle)]}")
+
+# alternatively we could use the index method
+# index method is similar to find method
+# except index method raises a ValueError if the substring is not found
+# let's find the index of 'art' in food
+index = food.index('art')
+print(f"Index of art is {index}")
+# if we expect to fail then we should use try except
+needle = 'unicorn'
+try:
+    index = food.index(needle)
+    print(f"Index of art is {index}")
+except ValueError as e:
+    print("We got a ValueError", e)
+    print(f"So there is no {needle} in {food}")
+
+# find would have returned -1
+index = food.find(needle)
+print(f"Index of {needle} is {index}") # -1 means not found
+
+# we can use count to count items in haystack
+haystack = "AABBBBA"
+needle = "BB"
+count = haystack.count(needle)
+print(f"Needle {needle} appears {count} times in haystack {haystack}")
+
+# so if count is non-overlapping let's implement our own count that is overlapping
+count = 0
+for i in range(len(haystack)): # actually we do not need the full range we could shorten it by len(needle)
+    if haystack[i:i + len(needle)] == needle: # techniclaly we could be overshooting the end of the haystack
+        count += 1
+print(f"Needle {needle} appears overlapping {count} times in haystack {haystack}")
+
+# so slicing can overshoot the end of the string
+# we could also undershoot the beginning
+print(food[-3252:1355]) # will print full string as long as it has less than 3252 characters :)
+# so slicing will not produce IndexError if we overshoot the end or start of the string
+
+
+# usually we loop through string with for lop
+for letter in food:
+    print(letter, end=' ') # we changed the default end of print from newline to space
+print() # print newline
+print("*"*40)
+
+# if we need indexes as well we can use enumerate
+for index, letter in enumerate(food):
+    print(index, letter)
+
+# let's look at some string methods
+# strings are objects in Python so they have methods
+# we can call methods on strings
+# methods are functions that belong to objects
+
+city = "Rīga"
+city_lower = city.lower() # so if I needed original changed then I would overwrite the variable with city = city.lower()
+print(f"City {city} in lower case is {city_lower}")
+city_upper = city.upper()
+print(f"City {city} in upper case is {city_upper}")
+
+# we have title and capitalize methods for those we need a sentence
+sentence = "the quick brown Fox jumps over the lazy dog"
+sentence_title = sentence.title()
+print(f"Sentence {sentence} in title case is {sentence_title}")
+# we also have capitalize method
+sentence_capitalize = sentence.capitalize()
+print(f"Sentence {sentence} in capitalized case is {sentence_capitalize}")
+# i could have made my own capitilize as follows
+new_sentence = sentence[0].upper() + sentence[1:].lower()
+print(f"Sentence {sentence} in capitalized case is {new_sentence}")
+# there is less used swapcase method which swaps the case of the string
+sentence_swapcase = sentence.swapcase()
+print(f"Sentence {sentence} in swapcase is {sentence_swapcase}")
+
+# more useful is replace method
+
+sentence_replaced = sentence.replace('Fox', 'Bear')
+print(f"Sentence {sentence} with Fox replaced with Bear is {sentence_replaced}")
+# replace is case sensitive
+# we can replace multiple characters at once
+sentence_replaced = sentence.replace('o', 'OXO')  # instead of o we will have OXO - could be any string
+print(f"Sentence {sentence} with o replaced with OXO is {sentence_replaced}")
+
+# let's replace some characters manually using an empty string buffer
+buffer = "" # any name for the buffer would do
+for letter in sentence:
+    if letter == 'o':
+        buffer += 'O' # so buffer = buffer + 'O'
+    else:
+        buffer += letter
+print(f"Sentence {sentence} with o replaced with O is {buffer}")
+# so we could replace multiple characters manually or use replace method
+
+# let's clean some text
+
+dirty_city = "  Rīga  \t    "
+print(f"Dirty city is {dirty_city}")
+clean_city = dirty_city.strip() # strip removes leading and trailing whitespace
+print(f"Clean city is {clean_city}")
+# we could clean only leading whitespace
+left_clean = dirty_city.lstrip()
+print(f"Left clean city is {left_clean}")
+# we could clean only trailing whitespace
+right_clean = dirty_city.rstrip()
+print(f"Right clean city is {right_clean}")
+
+# finally we can check if string starts or ends with a substring
+# we can use startswith and endswith methods
+# let's check if Rīga starts with Rī
+if city.startswith("Rī"):
+    print(f"City {city} starts with Rī")
+else:
+    print(f"City {city} does not start with Rī")
+
+# let's check if Rīga ends with ga
+if city.endswith("ga"):
+    print(f"City {city} ends with ga")
+else:
+    print(f"City {city} does not end with ga")
+
+# dirty city would not end with ga
+if dirty_city.endswith("ga"):
+    print(f"Dirty city {dirty_city} ends with ga")
+else:
+    print(f"Dirty city {dirty_city} does not end with ga")
+
+# however stripped city would end with ga
+if dirty_city.strip().endswith("ga"): # after strip() we have a temporary string that is not saved
+    print(f"Cleaned on the run {dirty_city} ends with ga")
+
+
