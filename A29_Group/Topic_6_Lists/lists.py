@@ -141,3 +141,123 @@ print(f"Beers: {beers}")
 # how many beers do we have?
 print(f"Number of beers: {len(beers)}")
 
+# let's get first 3 beers
+first_3_beers = beers[:3] # OUT OF PLACE by slicing - at the moment of slicing we create a new list
+print(f"First 3 beers: {first_3_beers}")
+print(f"Last 3 beers: {beers[-3:]}") # OUT OF PLACE by slicing
+
+# let's sort the list - again we have TWO approaches
+# OUT OF PLACE approach 
+# why out of place first? - because it does not modify the original list
+sorted_beers = sorted(beers) # this will create a new sorted list
+print(f"Sorted beers: {sorted_beers}")
+# original list is still the same
+print(f"OG Beers: {beers}")
+# IN PLACE approach
+beers.sort() # this will modify the original list - so original list will be sorted and original order lost
+print(f"Sorted original beers: {beers}")
+
+# let's compare contents of two lists
+# we can use == operator
+# it will compare each item in the list one by one and will return True if all items are the same in the same order
+# and False otherwise
+print(f"Our beer lists have same contents: {beers == sorted_beers}")
+# however those lists are completely different objects
+# for object comparison we can use is operator
+print(f"Beers is same object as sorted beers?: {beers is sorted_beers}")
+
+# for mutable objects = will create a new reference to the same object! not a copy!
+beer_alias = beers # not a copy just a new reference to the same object
+
+# if we want a copy we can use copy() method
+beer_copy = beers.copy() # OUT OF PLACE method - creates a new list WITHOUT modifying the original list
+
+# let's remove Aldaris from our beer_alias list
+beer_alias.remove("Aldaris") # IN PLACE method - modifies the list, by removing one item
+# now let's see all our beer variables
+print(f"Beers: {beers}")
+print(f"Beer alias: {beer_alias}")
+# copy is unaffacted by the change
+print(f"Beer copy: {beer_copy}")
+# let's remove first Aldaris from the copy as well
+beer_copy.remove("Aldaris") # IN PLACE method - modifies the list, by removing one item
+
+# now let's compare again beer with beer_alias and beer_copy
+print(f"Beers is same object as beer_alias?: {beers is beer_alias}") # so contents are same
+print(f"Beers is same object as beer_copy?: {beers is beer_copy}")
+print(f"Beer alias has same contents as beer_copy?: {beers == beer_copy}")
+
+# let's see how many Aldaris beers we have in the list
+print(f"Number of Aldaris beers: {beers.count('Aldaris')}")
+
+# existance of Aldaris beer in the list
+if "Aldaris" in beers: # so in will be True or False
+    print("Aldaris is in the list")
+
+# let's remove all Aldaris beers from the list
+# we can use remove() method - it will remove only the first occurrence
+# we can check if Aldaris is present in the list before removing
+while "Aldaris" in beers:
+    beers.remove("Aldaris") # IN PLACE method - modifies the list
+
+print(f"Beers: {beers}")
+
+# one note about in check for lists
+# in check for lists is slow for large lists - it has to go through all items (alternative use dict or set)
+
+# show our beer list
+print(f"Beers: {beers}")
+# now let's reverse it
+# again we have two approaches - OUT OF PLACE and IN PLACE
+# TWO OUT OF PLACE approaches
+reversed_beers = list(reversed(beers)) # this will create a new list, reversed does not return a list
+print(f"Reversed beers: {reversed_beers}")
+also_reversed_beers = beers[::-1] # this will create a new list, this is slicing approach
+print(f"Also reversed beers: {also_reversed_beers}")
+# note we use reversed if we need to go through the list in reverse order - more efficient than slicing
+print(f"Original beers: {beers}")
+# IN PLACE approach - modifies the original list
+beers.reverse() # IN PLACE - modifies the original list to the reversed order
+print(f"Reversed original beers: {beers}")
+# let's go back
+beers.reverse() # IN PLACE - modifies the original list to the original order
+print(f"OG Beers: {beers}")
+
+# let's remove one occurrence of Tērvetes
+beers.remove("Tērvetes") # IN PLACE method - modifies the list
+print(f"Beers: {beers}")
+
+# we can also find index of an item in the list
+# let's find index of Labietis
+index = beers.index("Labietis") # it will return the index of the first occurrence
+print(f"Index of Labietis: {index}")
+# for lists we do not have find() method - we have to use index() method
+# this means it will throw an error if the item is not in the list
+# we could use in check before calling index() method
+needle = "Zoltners"
+if needle in beers:
+    index = beers.index(needle)
+    print(f"Index of {needle}: {index}")
+else:
+    print(f"{needle} is not in the list")
+
+# alternative approach is to use try-except block
+try:
+    index = beers.index(needle) # so index will throw an error if the item is not in the list
+    print(f"Index of {needle}: {index}")
+except ValueError:
+    print(f"{needle} is not in the list")
+
+# again we can use . to access methods of an object
+# visual studio code and other IDEs will show you all available methods after pressing .
+
+# last but not least we can clear the list
+beers.clear() # IN PLACE method - modifies the list and removes all items
+print(f"Beers: {beers}")
+
+# we can add more items now again with append or extend methods
+beers.append("Labietis")
+beers.extend(["Piebalgas", "Valmiermuižas"])
+print(f"Beers: {beers}")
+
+
