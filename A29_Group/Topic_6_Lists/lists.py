@@ -260,4 +260,9 @@ beers.append("Labietis")
 beers.extend(["Piebalgas", "Valmiermuižas"])
 print(f"Beers: {beers}")
 
+# Full Documentations on List methods
+# https://docs.python.org/3/tutorial/datastructures.html#more-on-lists
+# real python - lists
+# https://realpython.com/python-lists-tuples/
+
 
