@@ -110,3 +110,34 @@ print(f"Beers: {beers}")
 beers.insert(100_000, "Tērvetes") # it will insert at the end of the list, BUT append is preferred
 print(f"Beers: {beers}")
 
+# we also have an OUT OF PLACE approach using + and = operators
+beers = beers + ["Užavas","Mežpils"] # this will create a new list and assign it to beers
+print(f"Beers: {beers}")
+
+# what happens if we try to append a list to a list?
+beers.append(["Tērvetes", "Lāčplēsis"]) # it will add a list as a single item - not quite what we want
+print(f"Beers: {beers}")
+
+# so we do not want the last item - again we have two approaches to getting rid of it
+# we could use pop() method - it will remove the last item and return it
+last_item = beers.pop() # IN PLACE METHOD - MODIFIES THE LIST!
+print(f"We just removed: {last_item}")
+print(f"Beers: {beers}")
+
+# another approach is to use slicing approach - OUT OF PLACE
+beers = beers[:-1] # this will create a new list without the last item
+print(f"Beers: {beers}")
+# again we can use slicing to get multiple items at once
+print(f"2nd and 3rd item {beers[1:3]}") # this will get 2nd and 3rd items
+# slicing does not throw errors if we try to get more items than we have
+print("Too many items", beers[2:100]) # this will get all items from 3rd to the end - as long as we have less than 100 
+
+# returning to question of extending a list with another list - so called flattening
+# OUT of place approach
+# beers = beers + ["Tērvetes", "Lāčplēsis"] # this will create a new list and assign it to beers
+# IN PLACE approach with extend
+beers.extend(["Tērvetes", "Lāčplēsis"]) # this will add all items from the list to the end of the beers list
+print(f"Beers: {beers}")
+# how many beers do we have?
+print(f"Number of beers: {len(beers)}")
+
