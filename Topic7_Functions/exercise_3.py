@@ -17,3 +17,23 @@
 # get_city_year(1000, 2, -50, 5000) -> -1 # samērā aktuāla problēma
 # get_city_year(1500, 5, 100, 5000) -> 15
 # get_city_year(1500000, 2.5, 10000, 2000000) -> 10
+
+
+def get_city_year(p0, perc, delta, p_target):
+    i=0
+    rez=p0
+    
+    while rez<=p_target and i>-1:
+        rez=rez+rez*perc*0.01+delta    
+        i+=1
+
+        if rez<=p0:
+            i=-1
+        print(rez, i)
+
+    return i
+
+print(get_city_year(1000, 2, -50, 5000) ) # -1
+print(get_city_year(1500, 5, 100, 5000)) # 15
+print(get_city_year(1500000, 2.5, 10000, 2000000)) # 10
+print(get_city_year(1000,-3,40,2000)) # TODO FIXME this should be -1 but it is infinite loop
