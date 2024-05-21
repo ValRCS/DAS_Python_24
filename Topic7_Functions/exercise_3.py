@@ -19,21 +19,27 @@
 # get_city_year(1500000, 2.5, 10000, 2000000) -> 10
 
 
-def get_city_year(p0, perc, delta, p_target):
-    i=0
-    rez=p0
+def get_city_year(p0, perc, delta, p_target, debug=False):
+    year=0
+    current_population=p0
     
-    while rez<=p_target and i>-1:
-        rez=rez+rez*perc*0.01+delta    
-        i+=1
+    while current_population<=p_target and year>-1:
+        current_population=int(current_population+current_population*perc*0.01+delta) # cilvēku skaits pēc gada
+        # we could discuss whether int is appropriate here, but it is not the main point of the exercise
+        year+=1
 
-        if rez<=p0:
-            i=-1
-        print(rez, i)
+        if current_population<=p0: # nozīme, ka esam iestrēguši bezgalīgā ciklā vai ejam uz leju
+            year=-1
+             
+        p0=current_population # mēs mainam p0 uz current_population, lai pārbaudītu, vai tas nav mazāks par p0
+        if debug:
+            print(current_population) # - starprezultāta izdruka
+    return year
 
-    return i
+
+
 
 print(get_city_year(1000, 2, -50, 5000) ) # -1
 print(get_city_year(1500, 5, 100, 5000)) # 15
 print(get_city_year(1500000, 2.5, 10000, 2000000)) # 10
-print(get_city_year(1000,-3,40,2000)) # TODO FIXME this should be -1 but it is infinite loop
+print(get_city_year(1000,-3,40,2000)) # fixed also
