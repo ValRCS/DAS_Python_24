@@ -276,3 +276,75 @@ print("Let's print a list")
 print_list(["Valdis", "Vītols", "Līga", "Maija","Rūta"])
 # now if I try printing a single number I will get a warning
 # print_list(42)
+
+# we could also print docstring of a function
+print(print_list.__doc__) # so __doc__ is a special attribute of functions
+
+# let's make a list of urls to learn more about functions
+
+function_resources = [
+
+# official Python docs
+    "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+    "https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions",
+    "https://docs.python.org/3/tutorial/controlflow.html#default-argument-values",
+    "https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments",
+    "https://docs.python.org/3/tutorial/controlflow.html#arbitrary-argument-lists",
+    "https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists",
+    "https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions",
+    "https://docs.python.org/3/tutorial/controlflow.html#documentation-strings",
+    "https://docs.python.org/3/tutorial/controlflow.html#function-annotations",
+    # realpython
+    "https://realpython.com/defining-your-own-python-function/",
+    "https://realpython.com/python-kwargs-and-args/",
+    "https://realpython.com/python-return-statement/",
+    # w3schools
+    "https://www.w3schools.com/python/python_functions.asp",
+    # google's python class
+    "https://developers.google.com/edu/python/introduction#user-defined-functions",
+]
+
+# let's print out the urls
+# but a first a function to do that
+def print_resources(resources: list[str]) -> None:
+    for resource in resources:
+        print(resource)
+
+# print_resources(function_resources)
+
+# passing mutables to functions
+# if we pass a list to a function and modify it inside the function it will be modified outside the function as well
+# primitives like numbers, strings, booleans are immutable
+
+# let's see an example
+def add_to_list(my_list, element):
+    my_list.append(element) # so this is IN PLACE method
+    return my_list # so same list is return, in fact I could skip this if I did not need the return value
+
+foods = ["bread", "ham", "cheese"]
+print(f"Original list: {foods}")
+new_foods = add_to_list(foods, "lettuce")
+print(f"New list: {new_foods}")
+# however if we check the original list it will be modified as well
+print(f"Original list: {foods}")
+# this means that they are the same list in memory
+print(f"Are they the same list? {foods is new_foods}")
+
+# if we want to avoid this we can make a copy of the list
+# we can use the copy method
+def add_to_list_out_of_place(my_list, element):
+    new_list = my_list.copy() # so this is a new list, original outsideis not modified
+    new_list.append(element) # so this is IN PLACE method
+    return new_list # really new list is returned
+
+really_new_foods = add_to_list_out_of_place(foods, "tomato")
+print(f"New list: {really_new_foods}")
+print(f"Original list: {foods}")
+
+# again this is for mutable objects like lists, dictionaries, sets and so on
+# this does not apply to immutable objects like numbers, strings, booleans
+
+# so takeaway is to be careful if we want to modify some mutable object inside a function
+
+# let's print our resources
+print_resources(function_resources)
