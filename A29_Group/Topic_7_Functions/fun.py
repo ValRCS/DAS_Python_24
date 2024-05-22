@@ -117,7 +117,7 @@ print(f"Multiplication is {multiplication}")
 
 # for returning more results , one option is a list
 # so let's say I want a function that returns rounded values of numbers in a list
-def round_numbers(numbers, precision    = 0): # precision is a default parameter
+def round_numbers(numbers, precision = 0): # precision is a default parameter
     # without list comprehension
     rounded_numbers = [] # so i create an empty list
     for number in numbers:
@@ -128,3 +128,151 @@ def round_numbers(numbers, precision    = 0): # precision is a default parameter
 numbers = [3.14159, 2.71828, 1.61803] # pi, e, golden ratio(phi)
 my_rounded_numbers = round_numbers(numbers, 2) # i could have used any name for the variable
 print(my_rounded_numbers)
+# note that since we have a default parameter we can call the function without the second parameter
+really_round_numbers = round_numbers(numbers) # so precision will be 0 here
+print(really_round_numbers)
+
+# main idea behind defaults is "sane" defaults - most common use case
+
+# let's say a greeting function
+def create_greeting(name="Jāni", greeting = "Labdien"):
+    # note no side effects here no printing
+    return f"{greeting}, {name}!"
+
+# i can print the result
+print(create_greeting("Valdis"))
+# we could also save this greeting for later use
+my_greeting = create_greeting("Līga", "Sveiki") # so here default is overridden
+print(my_greeting)
+default_greeting = create_greeting() # so here both defaults are used
+# the big assumption here is that Jāni is what we need to use it the most
+# in practice usually one of the parameters is changed more often than the other
+print(default_greeting)
+# it is possible to supply the parameters in any order
+print(create_greeting(greeting="Sveiki", name="Maija")) # Note I can use named parameters
+# use of named parameters is especially encourage if you have many boolean parameters
+
+# example of function with many Boolean parameters
+def create_person(name, 
+                  age, 
+                  is_student=False, 
+                  is_employed=False, 
+                  is_married=False):
+    # we could do some validation here on sane ages etc
+    if age < 0:
+        return "Age cannot be negative"
+    if age > 122:
+        return "Are you sure you are that old?"
+    return f"{name} is {age} years old. Student: {is_student}, Employed: {is_employed}, Married: {is_married}"
+
+print(create_person("Valdis", 44, is_student=True, is_employed=True))
+# above is much better if I called it without named parameters
+print(create_person("Valdis", 44, True, True)) # this is less readable and can lead to errors
+
+# args 
+# if we check print function it can take any number of arguments
+print("Hello", "World", "and", "Universe")
+# we can do the same with our functions
+def print_args(*args): # *args is a convention
+    print("Let's print all arguments")
+    for arg in args: # here we can iterate over all arguments
+        print(arg)
+
+print_args("Hello", "World", "and", "Universe")
+
+# alternatively we could use a list
+def print_list_args(args): 
+    print("Let's print all arguments")
+    for arg in args: # here we can iterate over all arguments
+        print(arg)
+
+arg_list = ["Alus", "vīns", "degvīns", "ūdens"]
+print_list_args(arg_list) # here are I am passing a single list
+
+# we could mix named and unnamed parameters
+# here name is REQUIRED, *args is optional
+def print_args_with_name(name, *args): # *args is a convention
+    print(f"Let's print all arguments for {name}")
+    for arg in args: # here we can iterate over all arguments
+        print(arg)
+
+print_args_with_name("Valdis", "Hello", "World", "and", "Universe")
+
+# we could even add default values
+def print_args_with_name_and_greeting(name, *args, greeting="Hello"): # *args is a convention
+    print(f"{greeting} {name}")
+    for arg in args: # here we can iterate over all arguments
+        print(arg)
+
+print_args_with_name_and_greeting("Valdis", "Pasaule", "and", "Universe")
+# in this approach if I want custom greeting I have to use named parameter
+print_args_with_name_and_greeting("Valdis", "Pasaule", "and", "Universe", greeting="Sveiki")
+
+# again alternative here would be just to use 3 parameters
+# name , words, greeting
+# this would be more readable and less error prone
+def print_args_with_name_and_greeting(name, words, greeting="Hello"): # *args is a convention
+    print(f"{greeting} {name}")
+    for word in words: # here we can iterate over all arguments
+        print(word)
+
+# one good practice is to create docstrings for your functions
+# Python lets us write documention direction in the function definition
+# we use triple quotes for this """ or '''
+# we finish the docstring with another set of matching triple quotes """ or '''
+
+# let's make a function to buy the ingredients for a sandwich
+def buy_ingredients(ingredients):
+    """This function buys the ingredients for a sandwich
+    It does not return anything"""
+    print("Go to the store")
+    print("Buy the ingredients")
+    for ingredient in ingredients:
+        print(f"Buy {ingredient}")
+
+buy_ingredients(["bread", "ham", "cheese"])
+
+# docstrings can be used to generate documentation for your code, generate web pages
+# there is a tool called Sphinx that can generate documentation from your docstrings
+# URL: https://www.sphinx-doc.org/en/master/index.html
+# many Python libraries use Sphinx to generate their documentation
+
+# docstrings work great with type hints
+
+# type hints are a way to tell what type of data a function expects and what it returns
+# for example if I have a function that takes two strings and returns their combined length
+def combine_lengths(a: str | list, b: str | list) -> int: # so | is used for allowing multiple types
+    """This function combines the lengths of two strings or lists or even a mix of both	
+    
+    Input:
+
+    a - first string\n
+    b - second string
+
+    Output:
+    int - sum of the lengths"""
+    return len(a) + len(b)
+
+# let's use it
+result = combine_lengths("Valdis", "Vītols")
+print(f"Result is {result}")
+
+# note that len would work on lists as well
+# let's try it
+result = combine_lengths(["Valdis", "Vītols"], ["Līga", "Maija","Rūta"])
+print(f"Result is {result}")
+
+# this could work on say print_list function
+def print_list(my_list: list) -> None:
+    """This function prints all elements of a list
+    
+    Input:
+    my_list - list of elements to print
+    """
+    for element in my_list:
+        print(element)
+
+print("Let's print a list")
+print_list(["Valdis", "Vītols", "Līga", "Maija","Rūta"])
+# now if I try printing a single number I will get a warning
+# print_list(42)
