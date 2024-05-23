@@ -238,3 +238,18 @@ print(items)  # dict_items([('a', 1), ('b', 2), ('c', 3)])
 # i could convert items to tuple or list if i want
 items_tuple = tuple(items)
 print(items_tuple)  # (('a', 1), ('b', 2), ('c', 3))
+
+
+# some more learning resources on tuples stored as a tuple
+
+learning_resources = (
+    "https://docs.python.org/3/library/stdtypes.html#tuple",
+    "https://realpython.com/python-tuples/",
+    "https://www.w3schools.com/python/python_tuples.asp",
+    "https://www.geeksforgeeks.org/tuples-in-python/",
+    # Google developer Python course
+    # TODO find Google info on tuples
+)
+# we can unpack this tuple to get the links in each row
+print(*learning_resources, sep='\n') # * unpacks the tuple into individual elements to be printed
+# above works on lists as well
