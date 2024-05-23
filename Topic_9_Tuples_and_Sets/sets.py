@@ -52,3 +52,33 @@ print("Unique food words as list:", food_list)
 # or we could use sorted function
 sorted_unique_food_list = sorted(food_set) # if I wanted a tuple I would add tuple() around sorted()
 print("Sorted unique food words as list:", sorted_unique_food_list)
+
+# now let's explore differences between set() and using {} to create a set
+# with set() we can create an empty set
+# set takes any iterable as an argument
+empty_set = set()
+print("Empty set:", empty_set)
+# with {} we can create an empty dictionary
+some_number_set = {1, 2, 3, 5,1, 0, -5, 1,3,3,1,2,3}
+print("Some number set:", some_number_set)
+# again if I want the uniques ordered I would use sorted() to get list or tuple
+# how about using set() on some iterable?
+some_number_list = [1, 2, 3, 5,1, 0, -5, 1,3,3,1,2,3]
+some_number_set = set(some_number_list)
+print("Some number set:", some_number_set)
+
+# we can update our sets
+# let's start with an empty set
+empty_set = set()
+# let's add some elements
+empty_set.update(some_number_list)
+print("Empty set after update:", empty_set)
+# let's add some more elements
+empty_set.update([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) # so update takes any iterable, set/list/tuple
+print("Empty set after another update:", empty_set)
+# we can also remove elements
+empty_set.remove(1)
+print("Empty set after removing 1:", empty_set)
+# i could add different date types to set
+empty_set.add('Valdis') # so add method adds a single element
+print("Empty set after adding Valdis:", empty_set)
