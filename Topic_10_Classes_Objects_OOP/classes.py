@@ -144,6 +144,15 @@ class ModernHouse():
         # only requirement is that we are returning a string
         # we could prepare the string here main thing that we DO NOT PRINT IT! just return
         return f"ModernHouse object called {self.name} with {self.rooms} rooms and {self.floors} floors"
+    
+    # i can make my own + for the object using __add__ method
+    def __add__(self, other):
+        rooms = self.rooms + other.rooms
+        floors = self.floors + other.floors
+        name = f"{self.name} and {other.name}"
+        # we will return a new object of the same class
+        return ModernHouse(name=name, rooms=rooms, floors=floors)
+    # we can define our own -, *, /, <, >, ==, !=, etc. methods 
 
     # my own methods - any name without __ is fine, just remember self in method definition
     def show_rooms(self):
@@ -202,3 +211,8 @@ print(type(millhouse_house)) # <class '__main__.ModernHouse'>
 oak_street_house = []
 for i in range(5):
     oak_street_house.append(ModernHouse(name=f"House No. {i+1}", address=f"Oak street {i+1}", floors=2))
+
+# now I can createa a frankenhouse with add
+frankenhouse = modern_house + millhouse_house
+# + creates a new object thus print is called from __init__ in new object
+print(frankenhouse) # ModernHouse object called Homer's and Millhouse's with 17 rooms and 4 floors
