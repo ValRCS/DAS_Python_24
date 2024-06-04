@@ -1,0 +1,20 @@
+[
+    {
+        "name": "J\u0101nis",
+        "surname": "B\u0113rzi\u0146\u0161",
+        "age": 25,
+        "is_student": true
+    },
+    {
+        "name": "P\u0113teris",
+        "surname": "Liepi\u0146\u0161",
+        "age": 35,
+        "is_student": false
+    },
+    {
+        "name": "Anna",
+        "surname": "Ozoli\u0146a",
+        "age": 22,
+        "is_student": true
+    }
+]

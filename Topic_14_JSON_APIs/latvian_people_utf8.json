@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Jānis",
+        "surname": "Bērziņš",
+        "age": 25,
+        "is_student": true
+    },
+    {
+        "name": "Pēteris",
+        "surname": "Liepiņš",
+        "age": 35,
+        "is_student": false
+    },
+    {
+        "name": "Anna",
+        "surname": "Ozoliņa",
+        "age": 22,
+        "is_student": true
+    }
+]
