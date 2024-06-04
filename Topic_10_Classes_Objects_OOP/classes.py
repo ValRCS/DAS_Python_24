@@ -208,11 +208,20 @@ print(type(millhouse_house)) # <class '__main__.ModernHouse'>
 
 # again I can make as many houses I want and store them in a list
 # let's make a development of houses in Oak street
-oak_street_house = []
-for i in range(5):
-    oak_street_house.append(ModernHouse(name=f"House No. {i+1}", address=f"Oak street {i+1}", floors=2))
+# oak_street_houses = []
+# for i in range(5):
+#     oak_street_houses.append(ModernHouse(name=f"House No. {i+1}", address=f"Oak street {i+1}", floors=2))
 
-# now I can createa a frankenhouse with add
-frankenhouse = modern_house + millhouse_house
-# + creates a new object thus print is called from __init__ in new object
-print(frankenhouse) # ModernHouse object called Homer's and Millhouse's with 17 rooms and 4 floors
+# # now I can createa a frankenhouse with add
+# frankenhouse = modern_house + millhouse_house
+# # + creates a new object thus print is called from __init__ in new object
+# print(frankenhouse) # ModernHouse object called Homer's and Millhouse's with 17 rooms and 4 floors
+
+def create_houses(n)->list[ModernHouse]:
+    houses = []
+    for i in range(n):
+        houses.append(ModernHouse(name=f"House No. {i+1}", address=f"Oak street {i+1}", floors=2))
+    return houses
+
+oak_street_houses = create_houses(5)
+# now with type hints I can see that oak_street_houses is a list of ModernHouse objects
