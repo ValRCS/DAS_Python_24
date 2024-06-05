@@ -29,3 +29,26 @@ class Person:
 # print(PI)
 # valdis = Person("Valdis")
 # print(valdis.greeting())
+
+# often we do want to run our module for testing purposes or just standalone
+
+# Python offers such a feature called __name__ which is a built-in variable.
+# we will use so called main guard
+# idea run code only if this is the main file
+
+if __name__ == "__main__":
+    print("Hey I am a module!")
+    print(greet("Valdis"))
+    print(PI)
+    valdis = Person("Valdis")
+    print(valdis.greeting())
+    # it is typical to run some tests in the module
+    # i could use assert to perform some tests
+    # assert is a keyword in Python that is used to check if a given logical expression is True or False.
+    # if the expression is True, it will return None.
+    # However, if the expression is False, it will raise an AssertionError exception.
+    assert greet("Valdis") == None
+    assert PI == 3.14159
+    assert valdis.greeting() == "Hello, Valdis!"
+# I could put an else here but it is not necessary
+# we rarely want to run anything when importing a module
