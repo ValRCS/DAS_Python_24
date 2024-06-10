@@ -1,0 +1,11 @@
+{
+    "name": "Rūta",
+    "age": 20,
+    "city": "Rīga",
+    "country": "Latvia",
+    "hobbies": [
+        "reading",
+        "swimming",
+        "coding"
+    ]
+}
