@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Rūta",
+        "age": 20,
+        "city": "Rīga"
+    },
+    {
+        "name": "Maija",
+        "age": 30,
+        "city": "London"
+    },
+    {
+        "name": "Ede",
+        "age": 25,
+        "city": "New York"
+    }
+]
